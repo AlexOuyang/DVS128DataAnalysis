@@ -22,7 +22,7 @@ function saveaerdat(train,filename)
 % this syntax: saveaerdat([int32(allTs),uint32(allAddr)])
 
 if nargin==1,
-    [filename,path,filterindex]=uiputfile('*.aedat','Save data file');
+    [filename,path,~]=uiputfile('*.aedat','Save data file');
 elseif nargin==2,
     path='';
 end
@@ -32,8 +32,9 @@ if ~strcmp(ext,'aedat'),
     ext='.aedat';
 end
 filename=fullfile(path,[name ext]);
+path_to_file = fullfile(pathstr, filename);
 
-f=fopen(filename,'w','b'); % open the file for writing with big endian format
+f=fopen(path_to_file,'w','b'); % open the file for writing with big endian format
 
 nevents=size(train,1); % number of events is height of matrix
 

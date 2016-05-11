@@ -22,7 +22,7 @@ function [allAddr,allTs]=loadaerdat(file, maxEvents, startEvent)
 % ends with the hex characters 0x0D 0x0A (CRLF, windows line ending).
 fprintf('\nloadaerdat function called \n')
 
-defaultmaxevents=1e6;
+defaultmaxevents=1e8;
 
 
 % check the input arguments
