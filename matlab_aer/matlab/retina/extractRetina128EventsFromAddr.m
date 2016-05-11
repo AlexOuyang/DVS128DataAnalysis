@@ -1,4 +1,4 @@
-function [x,y,pol]=extractRetinaEventsFromAddr(addr)
+function [x,y,pol]=extractRetina128EventsFromAddr(addr)
 %function [x,y,pol]=extractRetinaEventsFromAddr(addr)
 % this is for tmpdiff128
 % extracts retina events from 16 bit addr vector.

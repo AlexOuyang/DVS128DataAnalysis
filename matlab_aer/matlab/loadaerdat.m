@@ -24,14 +24,20 @@ fprintf('\nloadaerdat function called \n')
 
 defaultmaxevents=1e6;
 
+
 % check the input arguments
+
 if ~exist('file', 'var')
+    % Promote user to click on the file
     maxEvents = defaultmaxevents;
     [filename,pathname,~]=uigetfile({'*.*dat','*.aedat, *.dat'},'Select recorded retina data file');
+    path_to_file = strcat(pathname,filename);
     if filename==0, return; end
 elseif ischar(file)
+    path_to_file = file;
     filename = file;
 else
+    path_to_file = file;
     maxEvents = defaultmaxevents;
     [filename,pathname,~]=uigetfile({'*.*dat','*.aedat, *.dat'},'Select recorded retina data file');
     if filename==0, return; end
@@ -50,7 +56,6 @@ end
 
 fprintf('Reading at most %d events from file %s starting with event %d\n', maxEvents, filename, startEvent);
 
-path_to_file = strcat(pathname,filename)
 
 f=fopen(path_to_file,'r');
 % skip header lines

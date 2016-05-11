@@ -1,7 +1,7 @@
 %============= Example ==============%
 
 % Load the data 
-[allAddr, allTs] = loadaerdat('/../test_data/cam255_right_clamp_test1.aedat');
+[allAddr, allTs] = loadaerdat('/../test_data/cam255_alex_standing_up.aedat');
 % parse the address x, y and polarity
 [allAddr_x, allAddr_y, allAddr_pol] = extractRetina128EventsFromAddr(allAddr);
 % Rotate video by 180
