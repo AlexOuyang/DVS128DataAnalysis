@@ -1,6 +1,19 @@
 function [ y_intensity ] = eventIntensityOverTime( allTs, sampling_rate )
-    %UNTITLED Summary of this function goes here
-    %   Detailed explanation goes here
+    % eventIntensityOverTime takes input allTs and sampling_rate and
+    % outputs a plot of the event intensity of x amount of seconds
+    %
+    % INPUT allTs: vector that holds the time stamps of events
+    %       sampling_rate: number of points to obtain in a second,
+    %       preferred numbers are 1, 1e1 1e2.
+    %       
+    %
+    % OUTPUT y_intensity: holds vectors of event intensities per unit time
+    %
+    %        
+    %
+    % REMARKS
+    %
+    % SEE ALSO
     
     
     
