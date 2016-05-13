@@ -46,5 +46,20 @@ xlabel('Time elapsed in 1e-2 seconds');
 title('Sit Stand Test Event Intensty Over Time');
 
 
+%% FFT
+Y = fft(intensityOverTime);
+L = size(intensityOverTime, 2); % even-valued signal length L.
+P2 = abs(Y/L); % two-sided spectrum P2
+% compute the single-sided spectrum P1 based on P2
+P1 = P2(1:L/2+1); 
+P1(2:end-1) = 2*P1(2:end-1);
+% Define the frequency domain f and plot the single-sided amplitude spectrum P1.
+f = Fs*(0:(L/2))/L;
+figure;
+plot(f,P1);
+title('Single-Sided Amplitude Spectrum of EventIntensity(t)');
+xlabel('f (Hz)');
+ylabel('|P1(f)|');
+
 
 %% Savitzky Golay Filter
