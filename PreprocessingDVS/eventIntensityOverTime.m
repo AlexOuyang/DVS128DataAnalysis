@@ -1,9 +1,9 @@
-function [ y_intensity ] = eventIntensityOverTime( allTs, sampling_rate )
+function [ y_intensity ] = eventIntensityOverTime( allTs, Fs )
     % eventIntensityOverTime takes input allTs and sampling_rate and
     % outputs a plot of the event intensity of x amount of seconds
     %
     % INPUT allTs: vector that holds the time stamps of events
-    %       sampling_rate: number of points to obtain in a second,
+    %       Fs(Sampling Frequency): number of points to obtain in a second,
     %       preferred numbers are 1, 1e1 1e2.
     %       
     %
@@ -18,9 +18,9 @@ function [ y_intensity ] = eventIntensityOverTime( allTs, sampling_rate )
     
     
     % Because time stamps from dvs128 is in microseconds, so we need offest it
-    res = 1e6/sampling_rate;
+    res = 1e6/Fs;
     num_of_seconds = allTs(size(allTs,1))/res - allTs(1)/res;
-    x_time = 0:num_of_seconds;
+%     x_time = 0:num_of_seconds;
     second_counter = allTs(1)/res;
     y_intensity = zeros(0,num_of_seconds);
     intensity = 0;
