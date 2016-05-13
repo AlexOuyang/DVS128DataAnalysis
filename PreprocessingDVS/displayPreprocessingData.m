@@ -1,14 +1,22 @@
-%============= Example ==============%
+%% Examples
 
+%% Load and display data
 clear
 % Load the data 
 [allAddr, allTs] = loadaerdat('test_data/cam255_right_clamp_test1.aedat');
 % parse the address x, y and polarity
 [allAddr_x, allAddr_y, allAddr_pol] = extractRetina128EventsFromAddr(allAddr);
+% Display video stream
+displayDVSdata(allAddr_x, allAddr_y, allAddr_pol, allTs);
+
+
+
+%% Save rotated video stream to another file
+clear
+[allAddr, allTs] = loadaerdat('test_data/cam255_right_clamp_test1.aedat');
+[allAddr_x, allAddr_y, allAddr_pol] = extractRetina128EventsFromAddr(allAddr);
 % Rotate video by 180
 [allAddr_x, allAddr_y] = rotateCoordinates(allAddr_x, allAddr_y, 2);
-% Display video stream
-% displayDVSdata(allAddr_x, allAddr_y, allAddr_pol, allTs);
 % Convert x, y and pol back to 32 bit 
 allAddr = getTmpdiff128Addr(allAddr_x, allAddr_y, allAddr_pol);
 % Save the rotated data to file
@@ -28,8 +36,7 @@ displayDVSdata(allAddr_x, allAddr_y, allAddr_pol, allTs);
 
 
 
-%============= Example 2 - Standing Up 12 times + leg kicking ==============%
-
+%% Standing Up 12 times + leg kicking
 clear
 % Load the data 
 [allAddr, allTs] = loadaerdat('test_data/cam255_alex_standing_up.aedat');
@@ -37,8 +44,6 @@ clear
 [allAddr_x, allAddr_y, allAddr_pol] = extractRetina128EventsFromAddr(allAddr);
 % Rotate video by 180
 [allAddr_x, allAddr_y] = rotateCoordinates(allAddr_x, allAddr_y, 1);
-% Display video stream
-% displayDVSdata(allAddr_x, allAddr_y, allAddr_pol, allTs);
 % Convert x, y and pol back to 32 bit 
 allAddr = getTmpdiff128Addr(allAddr_x, allAddr_y, allAddr_pol);
 % Save the rotated data to file
