@@ -4,7 +4,7 @@
 
 clear
 Fs = 1e1;
-[allAddr, allTs] = loadaerdat('test_data/rotated_cam255_neal_standing_up.aedat');
+[allAddr, allTs] = loadaerdat('test_data/rotated_cam255_neal_standing_up2.aedat');
 % Moving Average Filter
 intensityOverTime = eventIntensityOverTime(allTs, Fs);
 figure
@@ -13,7 +13,7 @@ axis tight;
 ylabel('Event Intensity');
 xlabel('Time elapsed in 1e-1 seconds');
 title('Sit Stand Test Event Intensty Over Time');
-figure;
+% figure;
 
 %% Calculate total-time elaspsed
 flag1=1; % Flag so that once the start time index is found, it no longer enters the loop
