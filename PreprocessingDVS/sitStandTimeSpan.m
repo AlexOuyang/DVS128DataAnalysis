@@ -1,5 +1,54 @@
 %============= Example 2 - Standing Up 12 times + leg kicking ==============%
 
+
+%% Calculate total-time elaspsed based on sit stand exercise starting and ending time
+
+clear
+Fs = 1e1;
+[allAddr, allTs] = loadaerdat('test_data/rotated_cam255_neal_standing_up.aedat');
+intensityOverTime = eventIntensityOverTime(allTs, Fs);
+
+threshold=100; % Difference threshold, once the difference between two consecutive insensities is above/below this number, consider it the start/end index
+
+% Calculate start time for sit stand test based on threshold
+flag1=1; % Flag so that once the start time index is found, it no longer enters the loop
+for i=1:length(intensityOverTime)-1; % Loop through vector intensityOverTime - 1 to avoid accessing past the vector
+    difference=abs(intensityOverTime(i+1)-intensityOverTime(i)); % calculate difference between neighboring intensities
+    if difference > threshold && flag1 % If statement to determine start time index
+        start_index=i;
+        flag1=flag1-1;
+    end
+end
+
+
+intensityOverTime_reverse = fliplr(intensityOverTime);
+% Calculate start time for sit stand test based on threshold
+flag1=1; % Flag so that once the start time index is found, it no longer enters the loop
+for i=1:length(intensityOverTime_reverse)-1; % Loop through vector intensityOverTime - 1 to avoid accessing past the vector
+    difference=abs(intensityOverTime_reverse(i+1)-intensityOverTime_reverse(i)); % calculate difference between neighboring intensities
+    if difference > threshold && flag1 % If statement to determine start time index
+        stop_index=i;
+        flag1=flag1-1;
+    end
+end
+stop_index = size(intensityOverTime,2) - stop_index;
+
+total_time= (stop_index-start_index) * 1.0/Fs % Calculate total time
+average_time=total_time/5 % Calculate average time per cycle
+
+figure
+x = 1:size(intensityOverTime, 2);
+plot (x, intensityOverTime);
+hold on;
+plot ([start_index, stop_index], [intensityOverTime(start_index), intensityOverTime(stop_index)],'r^');
+hold off;
+axis tight;
+ylabel('Event Intensity');
+xlabel('Time elapsed in 1e-1 seconds');
+title('Sit Stand Test Event Intensty Over Time');
+
+
+
 %% Display extrema on event intensity over time plot (10 samples/s)
 
 clear
@@ -83,26 +132,6 @@ hold on
 plot(x(imax2),ymax2,'r*',x(imin2),ymin2,'g*')
 hold off
 
-
-%% Calculate total-time elaspsed based on sit stand exercise starting and ending time
-
-flag1=1; % Flag so that once the start time index is found, it no longer enters the loop
-flag2=1; % Flag so that once the end time index is found, it no longer enters the loop
-threshold=100; % Difference threshold, once the difference between two consecutive insensities is above/below this number, consider it the start/end index
-for i=1:length(intensityOverTime)-1; % Loop through vector intensityOverTime - 1 to avoid accessing past the vector
-    difference=abs(intensityOverTime(i+1)-intensityOverTime(i)); % calculate difference between neighboring intensities
-    if difference > threshold && flag1 % If statement to determine start time index
-        start_index=i;
-        flag1=flag1-1;
-    else difference< threshold && flag2 % Else statment to determine end time index
-        stop_index=i;
-        flag2=flag2-1;
-    end
-end
-total_time= (stop_index-start_index)*0.1 % Calculate total time
-average_time=total_time/5 % Calculate average time per cycle
-stop_index % Show end index
-start_index % Show start index
 
 
 
