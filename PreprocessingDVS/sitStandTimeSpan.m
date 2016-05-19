@@ -1,11 +1,28 @@
-%============= Example 2 - Standing Up 12 times + leg kicking ==============%
+%============= Sit stand Test ==============%
+
+
+clear
+file_name = 'test_data/rotated_cam255_right_clamp_test1.aedat';
+Fs = 1e1;
+[allAddr, allTs] = loadaerdat(file_name);
+intensityOverTime = eventIntensityOverTime(allTs, Fs);
+
+figure
+x = 1:size(intensityOverTime, 2);
+plot (x, intensityOverTime);
+axis tight;
+ylabel('Event Intensity');
+xlabel('Time elapsed in 1e-1 seconds');
+title('Gait Speed Test Event Intensty Over Time');
 
 
 %% Calculate total-time elaspsed based on sit stand exercise starting and ending time
 
 clear
+
+file_name = 'test_data/rotated_cam255_neal_standing_up2.aedat';
 Fs = 1e1;
-[allAddr, allTs] = loadaerdat('test_data/rotated_cam255_neal_standing_up.aedat');
+[allAddr, allTs] = loadaerdat(file_name);
 intensityOverTime = eventIntensityOverTime(allTs, Fs);
 
 threshold=100; % Difference threshold, once the difference between two consecutive insensities is above/below this number, consider it the start/end index
@@ -52,8 +69,9 @@ title('Sit Stand Test Event Intensty Over Time');
 %% Display extrema on event intensity over time plot (10 samples/s)
 
 clear
+file_name = 'test_data/rotated_cam255_neal_standing_up2.aedat';
 Fs = 1e1;
-[allAddr, allTs] = loadaerdat('test_data/rotated_cam255_neal_standing_up.aedat');
+[allAddr, allTs] = loadaerdat(file_name);
 % Moving Average Filter
 intensityOverTime = eventIntensityOverTime(allTs, Fs);
 
@@ -91,11 +109,12 @@ title('Sit Stand Test Event Intensty Over Time');
 % hold off
 
 
-%% Display extrema on event intensity over time plot (100 samples/s)
+%% Display extrema on event intensity over time plot (80 samples/s)
 
 clear
+file_name = 'test_data/rotated_cam255_neal_standing_up.aedat';
 Fs = 8 * 1e1;
-[allAddr, allTs] = loadaerdat('test_data/rotated_cam255_neal_standing_up.aedat');
+[allAddr, allTs] = loadaerdat(file_name);
 % Moving Average Filter
 intensityOverTime = eventIntensityOverTime(allTs, Fs);
 
@@ -138,10 +157,11 @@ hold off
 %% Moving Average Filter
 
 clear
+file_name = 'test_data/rotated_cam255_neal_standing_up.aedat';
 % Define Sampling frequency to be 1e2 samples/s
 Fs = 1e2;
 % Load data
-[allAddr, allTs] = loadaerdat('test_data/rotated_cam255_neal_standing_up2.aedat');
+[allAddr, allTs] = loadaerdat(file_name);
 % parse the address x, y and polarity
 [allAddr_x, allAddr_y, allAddr_pol] = extractRetina128EventsFromAddr(allAddr);
 % Moving Average Filter
